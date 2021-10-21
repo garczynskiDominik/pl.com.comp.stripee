@@ -6,7 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceCollection;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Log4j
 @Service
 public class InvoiceService {
 
-    @Autowired
     private final InvoiceConverter invoiceConverter;
 
     public InvoiceService(InvoiceConverter invoiceConverter) {
@@ -33,7 +33,6 @@ public class InvoiceService {
     private String apiKey;
 
 
-
     public void createInvoice() {
         Stripe.apiKey = apiKey;
 
@@ -43,17 +42,28 @@ public class InvoiceService {
             Invoice invoice = Invoice.create(params);
         } catch (StripeException e) {
             e.printStackTrace();
+            log.info("error while creating an invoice");
         }
+        log.info("created invoice");
     }
 
-    public List<InvoiceDto> getInvoices() throws StripeException {
+    public List<InvoiceDto> getInvoices() {
         Stripe.apiKey = apiKey;
 
         Map<String, Object> params = new HashMap<>();
         params.put("limit", 3);
 
-        InvoiceCollection invoices = Invoice.list(params);
+        InvoiceCollection invoices = null;
+        try {
+            invoices = Invoice.list(params);
+        } catch (StripeException e) {
+            e.printStackTrace();
+            log.info("error while returning invoices");
+        }
         List<InvoiceDto> invoiceDtos = invoiceConverter.entityToDto(invoices.getData());
+
+        log.info("return list invoices");
         return invoiceDtos;
     }
 }
+
