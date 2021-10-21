@@ -12,5 +12,4 @@ public class InvoiceDto {
     private BigDecimal amount;
     private String customerEmail;
     private String customerName;
-
 }
