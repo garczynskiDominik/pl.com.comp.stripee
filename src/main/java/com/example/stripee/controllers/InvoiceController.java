@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,8 +48,7 @@ public class InvoiceController {
         params.put("limit", 3);
 
         InvoiceCollection invoices = Invoice.list(params);
-
-        return invoices.getData().toArray();
+        List<Invoice> list = invoices.getData();
+        return null;
     }
-
 }
