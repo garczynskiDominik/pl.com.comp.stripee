@@ -9,7 +9,6 @@ import com.stripe.model.InvoiceCollection;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +32,8 @@ public class InvoiceService {
     private String apiKey;
 
 
+
+
     public void createInvoice() {
         Stripe.apiKey = apiKey;
 
@@ -47,11 +48,13 @@ public class InvoiceService {
         log.info("created invoice");
     }
 
+
+
     public List<InvoiceDto> getInvoices() {
         Stripe.apiKey = apiKey;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("limit", 3);
+        params.put("limit", 5);
 
         InvoiceCollection invoices = null;
         try {

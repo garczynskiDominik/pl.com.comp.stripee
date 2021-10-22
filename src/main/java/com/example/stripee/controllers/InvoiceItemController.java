@@ -16,7 +16,6 @@ public class InvoiceItemController {
 
     private final InvoiceItemService invoiceItemService;
 
-
     @PostMapping(value = {"/v1/invoiceitems"})
     public void addProductToInvoice() throws StripeException {
         invoiceItemService.addItemToInvoice();

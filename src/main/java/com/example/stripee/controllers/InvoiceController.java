@@ -16,7 +16,6 @@ public class InvoiceController {
 
     private final InvoiceService invoiceService;
 
-
     @PostMapping(value = {"/v1/invoices"})
     public void addInvoice() {
         invoiceService.createInvoice();

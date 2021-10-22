@@ -32,6 +32,8 @@ public class InvoiceItemService {
     @Value("${api.key}")
     private String apiKey;
 
+
+
     public void addItemToInvoice() {
         Stripe.apiKey = apiKey;
 
@@ -51,6 +53,8 @@ public class InvoiceItemService {
         }
         log.info("add item to invoice");
     }
+
+
 
     public List<InvoiceItemDto> getItems() {
         Stripe.apiKey = apiKey;

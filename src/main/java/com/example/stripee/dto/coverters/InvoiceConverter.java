@@ -3,10 +3,10 @@ package com.example.stripee.dto.coverters;
 import com.example.stripee.dto.InvoiceDto;
 import com.stripe.model.Invoice;
 import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Component
 public class InvoiceConverter {
 
@@ -24,5 +24,4 @@ public class InvoiceConverter {
                 .map(this::entityToDto)
                 .collect(Collectors.toList());
     }
-
 }
